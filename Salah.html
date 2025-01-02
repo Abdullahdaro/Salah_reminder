@@ -84,23 +84,36 @@
         <!-- Dropdown for city selection -->
         <label for="citySelect">Choose your city:</label>
         <select id="citySelect">
+            <option value="Istanbul,Turkey">Istanbul, Turkey</option>
+            <option value="Ankara,Turkey">Ankara, Turkey</option>
+            <option value="Bursa,Turkey">Bursa, Turkey</option>
+            <option value="Gaziantep,Turkey">Gaziantep, Turkey</option>
+            <option value="Aleppo,Syria">Aleppo, Syria</option>
+            <option value="Damascus,Syria">Damascus, Syria</option>
+            <option value="Riyadh,Saudi Arabia">Riyadh, Saudi Arabia</option>
             <option value="Moscow,Russia">Moscow, Russia</option>
             <option value="London,United Kingdom">London, United Kingdom</option>
             <option value="New York,USA">New York, USA</option>
             <option value="Cairo,Egypt">Cairo, Egypt</option>
-            <option value="Karachi,Pakistan">Karachi, Pakistan</option>
-            <option value="Istanbul,Turkey">Istanbul, Turkey</option>
+            <option value="Baghdad,Iraq">Baghdad, Iraq</option>
+            <option value="Tehran,Iran">Tehran, Iran</option>
+            <option value="Kabul,Afghanistan">Kabul, Afghanistan</option>
+            <option value="Islamabad,Pakistan">Islamabad, Pakistan</option>
+            <option value="Dhaka,Bangladesh">Dhaka, Bangladesh</option>
             <option value="Jakarta,Indonesia">Jakarta, Indonesia</option>
-            <option value="Riyadh,Saudi Arabia">Riyadh, Saudi Arabia</option>
-            <option value="Aleppo,Syria">Aleppo, Syria</option>
-            <option value="Damascus,Syria">Damascus, Syria</option>
+            <option value="Kuala Lumpur,Malaysia">Kuala Lumpur, Malaysia</option>
+            <option value="Singapore,Singapore">Singapore, Singapore</option>
+            <option value="Tokyo,Japan">Tokyo, Japan</option>
+            <option value="Beijing,China">Beijing, China</option>
+            <option value="Seoul,South Korea">Seoul, South Korea</option>
+            <option value="Sydney,Australia">Sydney, Australia</option>
         </select>
 
         <!-- Input for notification offset -->
-        <label for="notificationOffset">Notification Offset (minutes):</label>
+        <label for="notificationOffset">Notification offset time (minutes):</label>
         <input type="number" id="notificationOffset" value="-15" />
 
-        <button id="fetchTimes">Get Prayer Times</button>
+        <button id="fetchTimes">Save</button>
 
         <ul id="prayerTimes"></ul>
     </div>
