@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salah Reminder</title>
+    <style>
+        body, h1, ul, li, select, input, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus, button:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        li {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        li:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            select, input, button {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            li {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Salah Times</h1>
+
+    <!-- Dropdown for city selection -->
+    <label for="citySelect">Choose your city:</label>
+    <select id="citySelect">
+        <option value="Moscow">Moscow, Russia</option>
+        <option value="London">London, United Kingdom</option>
+        <option value="New York">New York, USA</option>
+        <option value="Cairo">Cairo, Egypt</option>
+        <option value="Karachi">Karachi, Pakistan</option>
+    </select>
+
+    <!-- Input for notification offset -->
+    <label for="notificationOffset">Notification Offset (minutes):</label>
+    <input type="number" id="notificationOffset" value="-15" />
+
+    <!-- Button to fetch prayer times -->
+    <button id="fetchTimes">Get Prayer Times</button>
+
+    <!-- List to display prayer times -->
+    <ul id="prayerTimes"></ul>
+
+    <script src="popup.js"></script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salah Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        select, input, button {
+            margin: 10px 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Salah Times</h1>
+
+    <!-- Dropdown for city selection -->
+    <label for="citySelect">Choose your city:</label>
+    <select id="citySelect">
+        <option value="Moscow">Moscow, Russia</option>
+        <option value="London">London, United Kingdom</option>
+        <option value="New York">New York, USA</option>
+        <option value="Cairo">Cairo, Egypt</option>
+        <option value="Karachi">Karachi, Pakistan</option>
+    </select>
+
+    <!-- Input for notification offset -->
+    <label for="notificationOffset">Notification Offset (minutes):</label>
+    <input type="number" id="notificationOffset" value="-15" />
+
+    <button id="fetchTimes">Get Prayer Times</button>
+
+    <ul id="prayerTimes"></ul>
+
+    <script src="popup.js"></script>
+</body>
+</html>
