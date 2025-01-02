@@ -217,10 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const notificationOffset = parseInt(notificationOffsetInput.value, 10);
         console.log('Notification Offest:', notificationOffset);
         const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+        console.log('Today:', today);
         const apiUrl = `https://api.aladhan.com/v1/timingsByCity/${today}?city=${city}&country=auto&method=2`;
 
         // Save the selected city and offset to localStorage
         localStorage.setItem('selectedCity', city);
+        console.log('Selected City:', city);
         localStorage.setItem('notificationOffset', notificationOffset);
 
         try {
@@ -269,17 +271,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 prayerTime.setMinutes(minutes);
                 prayerTime.setSeconds(0);
 
-                console.log('Original ${prayer} time:', prayerTime.toLocaleTimeString());
+/*                 console.log('Original ${prayer} time:', prayerTime.toLocaleTimeString()); */
 
                 // Apply the offset
                 prayerTime.setMinutes(prayerTime.getMinutes() + offset);
 
-                console.log('Adjusted ${prayer} time:', prayerTime.toLocaleTimeString());
+/*                 console.log('Adjusted ${prayer} time:', prayerTime.toLocaleTimeString()); */
 
                 if (prayerTime > currentDate) {
                     const timeUntilPrayer = (prayerTime.getTime() - currentDate.getTime()) / 1000;
                     chrome.alarms.create(prayer, { delayInMinutes: timeUntilPrayer / 60 });
-                    console.log(`Scheduled alarm for ${prayer} at ${prayerTime.toLocaleTimeString()}`);
+/*                     console.log(`Scheduled alarm for ${prayer} at ${prayerTime.toLocaleTimeString()}`); */
                 }
             });
         });
