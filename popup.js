@@ -213,12 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener to fetch prayer times
     fetchButton.addEventListener('click', async function () {
-        const city = citySelect.value;
+
         const notificationOffset = parseInt(notificationOffsetInput.value, 10);
-        console.log('Notification Offest:', notificationOffset);
-        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
-        console.log('Today:', today);
-        const apiUrl = `https://api.aladhan.com/v1/timingsByCity/${today}?city=${city}&country=auto&method=2`;
+        const today = new Date();
+        const formattedDate = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
+        const cityCountry = citySelect.value.split(','); // Split the value into city and country
+        const city = cityCountry[0];
+        const country = cityCountry[1];
+        // Update the API URL with city and country
+        const apiUrl = `https://api.aladhan.com/v1/timingsByCity/${formattedDate}?city=${city}&country=${country}`;
+
+        console.log(apiUrl); // For debugging, check the constructed URL
+
+        console.log('API URL:', apiUrl);
 
         // Save the selected city and offset to localStorage
         localStorage.setItem('selectedCity', city);
