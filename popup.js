@@ -23,15 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const notificationOffset = parseInt(notificationOffsetInput.value, 10);
         const today = new Date();
         const formattedDate = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
-        const cityCountry = citySelect.value.split(','); // Split the value into city and country
+        const cityCountry = citySelect.value.split(',');
         const city = cityCountry[0];
         const country = cityCountry[1];
-        // Update the API URL with city and country
         const apiUrl = `https://api.aladhan.com/v1/timingsByCity/${formattedDate}?city=${city}&country=${country}`;
 
 
         chrome.storage.local.set({
-            selectedCity: city,
+            selectedCity: citySelect.value , 
             notificationOffset: notificationOffset
         }, () => {
             console.log('Saved city and offset to chrome.storage');
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chrome.storage.local.set({ prayerTimes: timings }, () => {
                     console.log('Saved prayer times to chrome.storage');
                 });
-                
+
                 // Schedule notifications
                 schedulePrayerNotifications(timings, notificationOffset);
             } else {
@@ -71,30 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Function to schedule prayer notifications
     function schedulePrayerNotifications(timings, offset) {
         chrome.alarms.clearAll(() => {
-            const prayerNames = Object.keys(timings);
+            const displayedPrayerTimes = Array.from(prayerTimesList.querySelectorAll('li')).map(li => li.textContent.split(':')[0].trim());
             const currentDate = new Date();
 
-            prayerNames.forEach((prayer) => {
-                const [hours, minutes] = timings[prayer].split(':');
-                const prayerTime = new Date(currentDate);
-                prayerTime.setHours(hours);
-                prayerTime.setMinutes(minutes);
-                prayerTime.setSeconds(0);
+            displayedPrayerTimes.forEach((prayer) => {
+                if (timings[prayer]) {
+                    const [hours, minutes] = timings[prayer].split(':');
+                    const prayerTime = new Date(currentDate);
+                    prayerTime.setHours(hours);
+                    prayerTime.setMinutes(minutes);
+                    prayerTime.setSeconds(0);
 
-/*                 console.log('Original ${prayer} time:', prayerTime.toLocaleTimeString()); */
+                    prayerTime.setMinutes(prayerTime.getMinutes() + offset);
 
-                // Apply the offset
-                prayerTime.setMinutes(prayerTime.getMinutes() + offset);
-
-/*                 console.log('Adjusted ${prayer} time:', prayerTime.toLocaleTimeString()); */
-
-                if (prayerTime > currentDate) {
-                    const timeUntilPrayer = (prayerTime.getTime() - currentDate.getTime()) / 1000;
-                    chrome.alarms.create(prayer, { delayInMinutes: timeUntilPrayer / 60 });
-/*                     console.log(`Scheduled alarm for ${prayer} at ${prayerTime.toLocaleTimeString()}`); */
+                    if (prayerTime > currentDate) {
+                        const timeUntilPrayer = (prayerTime.getTime() - currentDate.getTime()) / 1000;
+                        chrome.alarms.create(prayer, { delayInMinutes: timeUntilPrayer / 60 });
+                        console.log(`Scheduled notification for ${prayer} at ${prayerTime.toLocaleTimeString()}`);
+                    }
                 }
             });
         });
